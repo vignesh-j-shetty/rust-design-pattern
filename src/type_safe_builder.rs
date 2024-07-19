@@ -27,7 +27,7 @@ impl WorkerBuilder<PhantomPinned> {
         Self { workload: PhantomPinned, memsize: 1028, keep_alive: true }
     }
 
-    pub fn workload(self, workload: impl Into<String>) -> WorkerBuilder<String> {
+    pub fn workload(&mut self, workload: impl Into<String>) -> WorkerBuilder<String> {
         WorkerBuilder { 
             workload: workload.into(), 
             memsize: self.memsize, 
@@ -46,4 +46,11 @@ impl WorkerBuilder<String> {
         }
     }
 }
+// fn main() {
+//     let mut builder = WorkerBuilder::new();
+//     // Can't do this, withoout calling workload
+//     // let worker = builder.memsize(1028*2).keep_alive(true).build();
+
+//     let worker = builder.keep_alive(true).memsize(1028).workload("workload").build();
+// }
 
